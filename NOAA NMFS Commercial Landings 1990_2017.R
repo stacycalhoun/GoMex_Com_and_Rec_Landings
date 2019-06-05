@@ -22,11 +22,8 @@ RawData <-
 FishList = read.csv("FisheriesGrpList.csv", stringsAsFactors = F) #Contains FisheriesGrp column to be added later
 # Wrangling ---------------------------------------------------------------
 
-#Getting rid of value column and freshwater drum
+#Getting rid of value column
 RawData$`$` = NULL
-
-
-RawData = subset(RawData, RawData$Species != "DRUM, FRESHWATER")
 
 
 #Adding FisheriesGrp Column, changing characters to factors and renaming "Metric Tons" column for ease of use
@@ -75,11 +72,10 @@ Com_Fish_Step2and3 = ddply(Com_Fish_Step1, .(Year, FisheriesGrp), summarize,
 
 #Step 4: LA-MS-AL commercial landings-- estimating long-term average, total annual landings for each functional group
 
-
 Com_Fish_Step4 = ddply(Com_Fish_Step2and3, .(FisheriesGrp), summarize,
                        CountTonnes_km2 = length(Tonnes_km2),
-                       AvgTonnes_km2 = mean(Tonnes_km2),
-                       VarTonnes_km2 = var(Tonnes_km2),
+                       AvgTonnes_km2 = mean(Tonnes_km2, na.rm = T),
+                       VarTonnes_km2 = var(Tonnes_km2, na.rm = T),
                        StDevTonnes_km2 = sqrt(VarTonnes_km2)
                        )
 
