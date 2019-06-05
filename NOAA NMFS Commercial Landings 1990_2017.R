@@ -19,7 +19,7 @@ RawData <-
   list.files(pattern="*_LANDINGS.csv") %>% 
   map_df(~read_csv(.))
 
-FishList = read_csv("FisheriesGrpList.csv") #Contains FisheriesGrp column to be added later
+FishList = read.csv("FisheriesGrpList.csv", stringsAsFactors = F) #Contains FisheriesGrp column to be added later
 # Wrangling ---------------------------------------------------------------
 
 #Getting rid of value column and freshwater drum
@@ -33,7 +33,6 @@ RawData = subset(RawData, RawData$Species != "DRUM, FRESHWATER")
 
 ComFish = merge(RawData, FishList, by = "Species", all.x = T)
 
-ComFish$Species = as.factor(ComFish$Species)
 
 ComFish$Month = as.factor(ComFish$Month)
 
@@ -43,7 +42,13 @@ ComFish$State = as.factor(ComFish$State)
 
 colnames(ComFish)[5] = "Metric_Tons"
 
+#Removed unwanted species from dataframe based on mismatches between FishList and ComFish
 
+Unwanted = anti_join(ComFish, FishList, by = "Species")
+
+Unwanted_Species = unique(Unwanted$Species)
+
+ComFish = ComFish[!ComFish$Species %in% Unwanted_Species, ]
 
 # Query Chain Steps -------------------------------------------------------
 
