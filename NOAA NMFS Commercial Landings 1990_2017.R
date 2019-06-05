@@ -79,3 +79,9 @@ Com_Fish_Step4 = ddply(Com_Fish_Step2and3, .(FisheriesGrp), summarize,
                        StDevTonnes_km2 = sqrt(VarTonnes_km2)
                        )
 
+
+# Writing Step 4 output to file -------------------------------------------
+
+#write.csv(Com_Fish_Step4, "LongTerm_Average_Comm_Fisheries_1990_2017.csv")
+
+
