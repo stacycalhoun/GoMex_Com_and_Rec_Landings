@@ -1,5 +1,7 @@
 #NOAA MRIP Recreational Fisheries Estimate Data Wrangling and Access Query Rewrites
 #Stacy Calhoun, Created 7 June 2019
+#MRIP Estimates data accessed from https://www.fisheries.noaa.gov/recreational-fishing-data/recreational-fishing-data-downloads 
+#page that links to https://www.st.nmfs.noaa.gov/st1/recreational/MRIP_Estimate_Data/ 
 
 remove(list=ls())
 assign("last.warning", NULL, envir = baseenv())
