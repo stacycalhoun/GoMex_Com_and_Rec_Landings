@@ -1,5 +1,6 @@
 #NOAA NMFS Commercial Fisheries Data
-#Wrangling into the right shape to be used in GoMex model
+#Wrangling into the right shape to be used in GoMex model and translating Access queries.
+#Data accessed from: https://www.st.nmfs.noaa.gov/commercial-fisheries/commercial-landings/monthly-landings/index
 #Stacy Calhoun; Created 4 June 2019
 
 remove(list=ls())
