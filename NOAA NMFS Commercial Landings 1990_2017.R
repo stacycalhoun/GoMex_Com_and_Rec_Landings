@@ -60,9 +60,10 @@ Com_Fish_Step1 = ddply(Com_Fish_Step1, .(FisheriesGrp, Year, Month, State), summ
 
 #Steps 2 and 3: LA-MS-AL commercial landings--Step 2: estimate total, annual landings for each functional group; 
 #Step 3: LA-MS-AL commercial landings--estimate annual tonnes/km2 for each functional group
+#Domain used here was calculated from Ainsworth polygons Tot_domain_km2 = 238258.824
 
 Com_Fish_Step2and3 = ddply(Com_Fish_Step1, .(Year, FisheriesGrp), summarize,
-                           domain = 42130, #This is from the shelf model just to run the code--Need to change!!!
+                           domain = 238258.824, 
                        AnnualSum_metric_tons = sum(SumOfMetric_Tons), 
                        Tonnes_km2 = AnnualSum_metric_tons/domain
                        )

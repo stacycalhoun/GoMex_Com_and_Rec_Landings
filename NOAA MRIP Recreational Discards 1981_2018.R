@@ -25,6 +25,8 @@ FishList = read.csv("RecFisheriesGrp.csv", stringsAsFactors = F)
 Indiv_Wt = read_xlsx("MRFSS mean indiv weight by species_kg.xlsx")
 
 
+
+
 # Data Wrangling and Subsetting -------------------------------------------
 colnames(Indiv_Wt)[5] = "Avg_WGT_Fish_A_kg"
 colnames(Indiv_Wt)[6] = "Avg_WGT_Fish_Subregion_kg"
@@ -92,7 +94,7 @@ colnames(df)[1] = "Use_IndivWGT_Fish_B2_kg"
 
 Rec_Discards_Step1 = cbind(RecDis, df)
 
-#Step 2: Calculating Total weight of discards (B2 fish)
+#Step 2 and Possibly 3?: Calculating Total weight of discards (B2 fish)
 
 Rec_Discards_Step1$Est_WGT_Fish_B2_kg = Rec_Discards_Step1$Use_IndivWGT_Fish_B2_kg*Rec_Discards_Step1$estrel
 
@@ -100,7 +102,6 @@ Rec_Discards_Step2 = ddply(Rec_Discards_Step1, .(year, FisheriesGrp), summarize,
                           
                            Tot_Est_WGT_Fish_B2_kg = sum(Est_WGT_Fish_B2_kg),
                            Tot_Est_WGT_Fish_B2_tonnes = Tot_Est_WGT_Fish_B2_kg*0.001
-                           
                            )
 
 
